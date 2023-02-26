@@ -1,24 +1,30 @@
-class Solution(object):
-    def twoSum(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
+from typing import List
 
-        tmp_dic = {nums[0]: 0}
 
-        for i in range(1, len(nums)):
-            tmp_idx = tmp_dic.get(target - nums[i])
-            if tmp_idx is not None:
-                return [tmp_idx, i]
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        dict = {}
+        for i,num in enumerate(nums):
+            remainder = target - num
+            remainder_idx = dict.get(remainder)
+            if remainder_idx is not None:
+                return [i,remainder_idx]
             else:
-                tmp_dic[nums[i]] = i
+                dict[num] = i 
+    
+    def twoSum2(self, nums: List[int], target: int) -> List[int]:
+        dict = {nums[0]:0}
+        nums = nums[1:]
+        for i,num in enumerate(nums,1):
+            remainder = target - num
+            remainder_idx = dict.get(remainder)
+            if remainder_idx is not None:
+                return [remainder_idx,i]
+            else:
+                dict[num] = i
 
 
 if __name__ == '__main__':
-    sln = Solution()
-    result = sln.twoSum([1, 2, 3, 4, 5], 5)
-    print(result)
-    mylist = [1, 2, 3, 4]
-    print([mylist] * 3, [mylist * 3], mylist * 3)
+    s = Solution()
+    print(s.twoSum2([2,7,11,15],9))
+  
